@@ -1,0 +1,11 @@
+ADD_SUBDIRECTORY(extend_cfg)
+
+
+PYTHON_ADD_MODULE(clang_cfg pybind.cpp)
+
+TARGET_LINK_LIBRARIES(clang_cfg CFG ${LLVM_LIBS})
+TARGET_LINK_LIBRARIES(clang_cfg ${CLANG_LIBS})
+
+
+
+

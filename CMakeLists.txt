@@ -1,0 +1,29 @@
+
+CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
+PROJECT(Clang-CFG)
+SET(CMAKE_C_COMPILER gcc)
+SET(CMAKE_CXX_COMPILER g++)
+SET(CMAKE_CXX_STANDARD 11)
+
+SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+SET(THIRD_PARTY_PATH "${CMAKE_BINARY_DIR}/third_party" CACHE STRING
+        "A path setting third party libraries download & build directories")
+
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti -Wall -Wextra")
+
+OPTION(PY_VERSION "Specify python version" ${PY_VERSION})
+
+IF(NOT PY_VERSION)
+    SET(PY_VERSION 3.6)
+ENDIF()
+
+SET(THIRD_PARTY_BUILD_TYPE Release)
+
+INCLUDE(external/python)
+INCLUDE(external/pybind11)
+INCLUDE(external/llvm)
+
+LINK_LIBRARIES(${PYTHON_LIBRARIES})
+
+ADD_SUBDIRECTORY(clang-cfg)
+
