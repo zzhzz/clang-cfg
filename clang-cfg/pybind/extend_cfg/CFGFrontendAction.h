@@ -18,7 +18,7 @@ namespace clang_cfg
     public:
         std::unique_ptr<ASTConsumer> CreateASTConsumer(CompilerInstance& CI, StringRef file) override {
             rewriter.setSourceMgr(CI.getSourceManager(), CI.getLangOpts());
-            return llvm::make_unique<ASTConsumerForCFG>(CI.getASTContext(), rewriter);
+            return std::make_unique<ASTConsumerForCFG>(CI.getASTContext(), rewriter);
         }
     private:
         Rewriter rewriter;

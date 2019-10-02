@@ -27,7 +27,7 @@ namespace clang_cfg {
 
     }
 
-    bool ASTVisitorForCFG::VisitFunctionDecl(FunctionDecl *d) override {
+    bool ASTVisitorForCFG::VisitFunctionDecl(FunctionDecl *d) {
         if(d->hasBody()){
             if(ParseHelper::isInSystem(this->context, d)){
                 return true;
