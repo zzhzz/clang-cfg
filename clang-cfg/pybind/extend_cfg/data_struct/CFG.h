@@ -2,6 +2,8 @@
 // Created by zzhzz on 2019-09-25.
 //
 
+#pragma once
+
 #ifndef CLANG_CFG_CFG_H
 #define CLANG_CFG_CFG_H
 
@@ -19,7 +21,7 @@ namespace clang_cfg {
 
     class CFG{
     public:
-        void add_block(Block& block);
+        void add_block(Block block);
         void add_edge(int u, int v, int type);
         vector<pair<pair<int, int>,int>> edges;
         vector<Block> block_list;

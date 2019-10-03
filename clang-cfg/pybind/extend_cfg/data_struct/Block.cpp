@@ -7,6 +7,6 @@
 
 namespace clang_cfg {
     void Block::add_ast(clang_cfg::AST ast) {
-        this->content.emplace_back(ast);
+        this->content.push_back(ast);
     }
 }

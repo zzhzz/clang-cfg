@@ -34,6 +34,7 @@ namespace clang_cfg{
                 JSONCompilationDatabase::loadFromBuffer(config_json, error_str, JSONCommandLineSyntax::AutoDetect);
         if(database == NULL) {
             //throw exception
+            std::cout << error_str << std::endl;
         }
         return database;
     }
@@ -43,8 +44,8 @@ namespace clang_cfg{
         vector<CFG> parse(vector<string> file_names, string compile_args, bool with_df) {
             StringRef compile_json = StringRef(compile_args);
             std::unique_ptr<CompilationDatabase> database = getCompilationDataBase(compile_json);
+            vector<CompileCommand> vs = (*database).getAllCompileCommands();
             ClangTool tool(*database, ArrayRef<string>(file_names));
-
             tool.run(newFrontendActionFactory<CFGFrontendAction>().get());
             CFGList& list = CFGList::getInst();
             vector<CFG> vecs = list.vecs;

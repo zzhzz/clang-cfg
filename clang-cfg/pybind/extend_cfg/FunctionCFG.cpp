@@ -16,21 +16,20 @@ namespace clang_cfg {
         if(isa<FunctionDecl>(decl)){
             FunctionDecl* functionDecl = dyn_cast<FunctionDecl>(decl);
             return functionDecl->getNameAsString();
-        } else if(isa<ObjCMethodDecl>(decl)){
-            ObjCMethodDecl* methodDecl = dyn_cast<ObjCMethodDecl>(decl);
-            return methodDecl->getNameAsString();
         }
     }
 
     void FunctionCFG::getCFG(clang::ASTContext &ctx) {
         CFG result_cfg;
         result_cfg.func_name = this->getNameAsString();
+        std::cout << result_cfg.func_name << std::endl;
         Stmt* body = decl->getBody();
         clang::CFG* cfg = clang::CFG::buildCFG(decl, body, &ctx, clang::CFG::BuildOptions()).get();
-
+        std::cout << cfg->size() << std::endl;
         for(clang::CFG::const_iterator it = cfg->begin(); it != cfg->end(); it++) {
             int block_id = (*it)->getBlockID();
             Block block;
+            std::cout << (*it)->size() << std::endl;
             for(clang::CFGBlock::const_iterator block_it = (*it)->begin(); block_it != (*it)->end(); block_it++){
                 Optional<clang::CFGStmt> block_stmt = block_it->getAs<clang::CFGStmt>();
                 if(block_stmt) {
@@ -52,7 +51,7 @@ namespace clang_cfg {
 
             for(clang::CFGBlock::succ_iterator succ_it = (*it)->succ_begin(); succ_it != (*it)->succ_end(); succ_it++){
                 CFGBlock* blk = *succ_it;
-                if(blk == NULL)
+                if(blk == nullptr)
                     continue;
                 int v = blk->getBlockID();
                 result_cfg.add_edge(block_id, v, edge_type);
@@ -61,7 +60,7 @@ namespace clang_cfg {
             result_cfg.add_block(block);
         }
         CFGList& list = CFGList::getInst();
-        list.vecs.emplace_back(result_cfg);
+        list.vecs.push_back(result_cfg);
     }
 
     AST FunctionCFG::transToAST(clang::Stmt* stmt, clang::ASTContext &ctx) {
@@ -124,6 +123,7 @@ namespace clang_cfg {
                         std::string name = vd->getNameAsString();
                         ast.add_defination(name);
                         std::string type = vd->getType().getUnqualifiedType().getCanonicalType().getAsString();
+
                         ast.add_edge(uid, ast.get_next());
                         ast.add_node(type);
                     }
@@ -146,11 +146,11 @@ namespace clang_cfg {
             }
             if(isa<IntegerLiteral>(cur_stmt)){
                 const IntegerLiteral * literal = dyn_cast<IntegerLiteral>(cur_stmt);
-                long long  v = *literal->getValue().getRawData();
+                long long v = *(literal->getValue().getRawData());
                 ast.modify_node(uid, "const_" + std::to_string(v));
             }
-            for(Stmt::child_iterator child = stmt->child_begin(); child != stmt->child_end(); child++){
-                if(*child == NULL){
+            for(Stmt::child_iterator child = cur_stmt->child_begin(); child != cur_stmt->child_end(); child++){
+                if(*child == nullptr){
                     continue;
                 }
                 string classname = (*child)->getStmtClassName();
@@ -161,6 +161,7 @@ namespace clang_cfg {
                 }
             }
         }
+        std::cout << "safe" << std::endl;
         return ast;
     }
 }

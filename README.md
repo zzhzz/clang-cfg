@@ -19,4 +19,6 @@ For an alpha version, I haven't provide python wrapper for the project and shoud
 
 
 * use `cd build/clang-cfg/pybind` change into the directory of static library 
-* run `python -c "import clang-cfg"
+* run `python -c "import clang-cfg" to test
+
+## 

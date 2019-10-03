@@ -18,7 +18,7 @@ namespace clang_cfg {
 
     FunctionCFG* ASTVisitorForCFG::getOrInsertFunction(Decl* d) {
         d = d->getCanonicalDecl();
-        std::shared_ptr<FunctionCFG> &Node = Roots[d];
+        std::shared_ptr<FunctionCFG>& Node = Roots[d];
         if(!Node){
             Node = std::shared_ptr<FunctionCFG>(new FunctionCFG(d));
             hash[d] = (this->idx)++;

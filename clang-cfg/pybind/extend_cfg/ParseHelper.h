@@ -2,6 +2,8 @@
 // Created by zzhzz on 2019-09-26.
 //
 
+#pragma once
+
 #ifndef CLANG_CFG_PARSEHELPER_H
 #define CLANG_CFG_PARSEHELPER_H
 

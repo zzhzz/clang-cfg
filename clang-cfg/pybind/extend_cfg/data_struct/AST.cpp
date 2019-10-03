@@ -15,16 +15,15 @@ namespace clang_cfg {
     }
 
     string AST::skipspace(string name) {
-        for(string::iterator it = name.begin(); it != name.end(); it++){
-            if(*it == ' ')
-                *it = '_';
+        for(int i = 0; i < name.length(); i++){
+            if(name[i] == ' ') name[i] = '_';
         }
         return name;
     }
 
     void AST::add_node(string label) {
         this->n += 1;
-        this->node_labels.emplace_back(skipspace(move(label)));
+        this->node_labels.push_back(skipspace(move(label)));
     }
 
     void AST::add_defination(string name) {
@@ -39,11 +38,11 @@ namespace clang_cfg {
 
     void AST::add_edge(int u, int v) {
         assert(u < this->n && v < this->n);
-        this->edges.emplace_back(std::make_pair(u, v));
+        this->edges.push_back(std::make_pair(u, v));
     }
 
     void AST::add_call(int u, string name) {
-        this->calls.emplace_back(std::make_pair(u, skipspace(move(name))));
+        this->calls.push_back(std::make_pair(u, skipspace(move(name))));
     }
 
     void AST::modify_node(int node_id, string new_value) {
