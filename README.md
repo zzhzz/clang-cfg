@@ -17,11 +17,10 @@
 
 For an alpha version, I haven't provide python wrapper for the project and shoud be import directly
 
-
-* use `cd build/clang-cfg/pybind` change into the directory of static library 
-* run `python -c "import clang-cfg" to test
+* run `cd build/clang-cfg/pybind` change into the directory of static library 
+* run `python -c "import clang_cfg" to test
 
 ## Tips
 
 * This project based on llvm, it will take long time to download and build llvm as a third party project
-* 
+* This project based on pybind11, which needs to open `-frtti` option of compiler. The default compile option of llvm doesn't open it.
