@@ -37,7 +37,6 @@ namespace clang_cfg {
     }
 
     void AST::add_edge(int u, int v) {
-        assert(u < this->n && v < this->n);
         this->edges.push_back(std::make_pair(u, v));
     }
 

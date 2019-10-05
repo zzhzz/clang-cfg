@@ -10,6 +10,7 @@ ExternalProject_Add(
         extern_llvm
         GIT_REPOSITORY "https://github.com/llvm/llvm-project.git"
         UPDATE_COMMAND ""
+        SOURCE_DIR ${LLVM_PREFIX}/src/extern_llvm/llvm
         SOURCE_SUBDIR ${SOURCE_SUBDIR}
         CMAKE_ARGS -DLLVM_ENABLE_PROJECTS=clang
                    -DCMAKE_INSTALL_PREFIX=${LLVM_PREFIX}/build

@@ -25,10 +25,13 @@ namespace clang_cfg {
         result_cfg.func_name = this->getNameAsString();
         std::cout << result_cfg.func_name << std::endl;
         Stmt* body = decl->getBody();
-        clang::CFG* cfg = clang::CFG::buildCFG(decl, body, &ctx, clang::CFG::BuildOptions()).get();
+        std::unique_ptr<clang::CFG> cfg_ptr = clang::CFG::buildCFG(decl, body, &ctx, clang::CFG::BuildOptions());
+        clang::CFG* cfg = cfg_ptr.get();
         std::cout << cfg->size() << std::endl;
         for(clang::CFG::const_iterator it = cfg->begin(); it != cfg->end(); it++) {
             clang::CFGBlock* blk = *it;
+            if(blk == nullptr)
+                continue;
             int block_id = blk->getBlockID();
             Block block;
             for(clang::CFGBlock::const_iterator block_it = blk->begin(); block_it != blk->end(); block_it++){
@@ -75,6 +78,7 @@ namespace clang_cfg {
         string name = stmt->getStmtClassName();
         ast.add_node(name);
         queue<pair<Stmt*, int>> que;
+        while(!que.empty()) que.pop();
         que.push(make_pair(stmt, 0));
         while(!que.empty()) {
             Stmt* cur_stmt = que.front().first;
