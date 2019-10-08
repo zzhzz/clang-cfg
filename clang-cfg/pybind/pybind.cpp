@@ -41,14 +41,14 @@ namespace clang_cfg{
 
     class Parser {
     public:
-        vector<CFG> parse(vector<string> file_names, string compile_args, bool with_df) {
+        vector<vector<CFG>> parse(vector<string> file_names, string compile_args) {
             StringRef compile_json = StringRef(compile_args);
             std::unique_ptr<CompilationDatabase> database = getCompilationDataBase(compile_json);
             vector<CompileCommand> vs = (*database).getAllCompileCommands();
             ClangTool tool(*database, ArrayRef<string>(file_names));
             tool.run(newFrontendActionFactory<CFGFrontendAction>().get());
             CFGList& list = CFGList::getInst();
-            vector<CFG> vecs = list.vecs;
+            vector<vector<CFG>> vecs = list.vecs;
             return vecs;
         }
     };

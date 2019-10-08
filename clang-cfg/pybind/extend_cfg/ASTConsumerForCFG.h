@@ -8,6 +8,7 @@
 
 #include "global.h"
 #include "ASTVisitorForCFG.h"
+#include "CFGList.h"
 
 #include <vector>
 
@@ -19,6 +20,8 @@ namespace clang_cfg{
         ASTConsumerForCFG(ASTContext& ctx, Rewriter& rewriter) : visitor(ctx, rewriter) {}
 
         void HandleTranslationUnit(ASTContext& context) override {
+            CFGList& list = CFGList::getInst();
+            list.vecs.emplace_back(vector<CFG>()); 
             visitor.TraverseDecl(context.getTranslationUnitDecl());
         }
 

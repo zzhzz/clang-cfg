@@ -23,11 +23,9 @@ namespace clang_cfg {
     void FunctionCFG::getCFG(clang::ASTContext &ctx) {
         CFG result_cfg;
         result_cfg.func_name = this->getNameAsString();
-        std::cout << result_cfg.func_name << std::endl;
         Stmt* body = decl->getBody();
         std::unique_ptr<clang::CFG> cfg_ptr = clang::CFG::buildCFG(decl, body, &ctx, clang::CFG::BuildOptions());
         clang::CFG* cfg = cfg_ptr.get();
-        std::cout << cfg->size() << std::endl;
         for(clang::CFG::const_iterator it = cfg->begin(); it != cfg->end(); it++) {
             clang::CFGBlock* blk = *it;
             if(blk == nullptr)
@@ -37,13 +35,11 @@ namespace clang_cfg {
             for(clang::CFGBlock::const_iterator block_it = blk->begin(); block_it != blk->end(); block_it++){
                 Optional<clang::CFGStmt> block_stmt = block_it->getAs<clang::CFGStmt>();
                 if(block_stmt) {
-                    std::cout << "ast in" << std::endl;
                     Stmt* stmt = const_cast<Stmt*>(block_stmt->getStmt());
                     if(stmt){
                         AST ast = transToAST(stmt, ctx);
                         block.add_ast(ast);
                     }
-                    std::cout << "ast out" << std::endl;
                 }
             }
             int edge_type = 0, edge_size = blk->succ_size();
@@ -57,7 +53,6 @@ namespace clang_cfg {
                 // 3 for dataflow, 4 for function call, >5 for switch edges
                 edge_type = 5;
             }
-            std::cout << "edge in" << std::endl;
             for(clang::CFGBlock::succ_iterator succ_it = blk->succ_begin(); succ_it != blk->succ_end(); succ_it++){
                 CFGBlock* succ_blk = *succ_it;
                 if(succ_blk == nullptr)
@@ -66,11 +61,10 @@ namespace clang_cfg {
                 result_cfg.add_edge(block_id, v, edge_type);
                 edge_type += 1;
             }
-            std::cout << "edge out" << std::endl;
             result_cfg.add_block(block);
         }
         CFGList& list = CFGList::getInst();
-        list.vecs.push_back(result_cfg);
+        list.vecs.back().push_back(result_cfg);
     }
 
     AST FunctionCFG::transToAST(clang::Stmt* stmt, clang::ASTContext &ctx) {
@@ -164,7 +158,6 @@ namespace clang_cfg {
                 }
             }
         }
-        std::cout << "safe" << std::endl;
         return ast;
     }
 }

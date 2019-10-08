@@ -17,7 +17,7 @@ namespace clang_cfg{
             static CFGList inst;
             return inst;
         }
-        vector<CFG> vecs;
+        vector<vector<CFG>> vecs;
     private:
         CFGList() = default;
     };
