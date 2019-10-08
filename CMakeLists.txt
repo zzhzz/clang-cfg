@@ -8,7 +8,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 SET(THIRD_PARTY_PATH "${CMAKE_BINARY_DIR}/third_party" CACHE STRING
         "A path setting third party libraries download & build directories")
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti -Wall -Wextra")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
 
 OPTION(PY_VERSION "Specify python version" ${PY_VERSION})
 
