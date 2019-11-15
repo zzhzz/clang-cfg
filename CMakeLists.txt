@@ -8,7 +8,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 SET(THIRD_PARTY_PATH "${CMAKE_BINARY_DIR}/third_party" CACHE STRING
         "A path setting third party libraries download & build directories")
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti -fPIC")
 
 OPTION(PY_VERSION "Specify python version" ${PY_VERSION})
 
@@ -17,6 +17,8 @@ IF(NOT PY_VERSION)
 ENDIF()
 
 SET(THIRD_PARTY_BUILD_TYPE Release)
+
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/clang-cfg/pybind)
 
 INCLUDE(external/python)
 INCLUDE(external/pybind11)

@@ -12,9 +12,12 @@ namespace clang_cfg{
     using namespace llvm;
 
     bool ParseHelper::isInSystem(ASTContext& context, Decl* decl) {
-        return context.getSourceManager().isInSystemHeader(decl->getLocation()) ||
-               context.getSourceManager().isInExternCSystemHeader(decl->getLocation()) ||
-               context.getSourceManager().isInSystemMacro(decl->getLocation());
+        if(isa<FunctionDecl>(decl)){
+            auto* fd = dyn_cast<FunctionDecl>(decl);
+            return fd->isDependentContext();
+        }
+        return context.getSourceManager().isInSystemHeader(decl->getBeginLoc()) ||
+                context.getSourceManager().isInSystemMacro(decl->getBeginLoc());
     }
 
     bool ParseHelper::canIncludeInGraph(Decl* decl) {
