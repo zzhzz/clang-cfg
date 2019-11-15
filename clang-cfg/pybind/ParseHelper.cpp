@@ -4,7 +4,7 @@
 
 #include <queue>
 
-#include "global.h"
+#include "extend_cfg/global.h"
 #include "ParseHelper.h"
 
 namespace clang_cfg{
@@ -12,12 +12,12 @@ namespace clang_cfg{
     using namespace llvm;
 
     bool ParseHelper::isInSystem(ASTContext& context, Decl* decl) {
-        if(context.getSourceManager().isInSystemHeader(decl->getLocation()) ||
-            context.getSourceManager().isInExternCSystemHeader(decl->getLocation()) ||
-            context.getSourceManager().isInSystemMacro(decl->getLocation())) {
-            return true;
+        if(isa<FunctionDecl>(decl)){
+            auto* fd = dyn_cast<FunctionDecl>(decl);
+            return fd->isDependentContext();
         }
-        return false;
+        return context.getSourceManager().isInSystemHeader(decl->getBeginLoc()) ||
+                context.getSourceManager().isInSystemMacro(decl->getBeginLoc());
     }
 
     bool ParseHelper::canIncludeInGraph(Decl* decl) {
