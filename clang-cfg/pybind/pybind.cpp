@@ -3,6 +3,9 @@
 //
 
 #include <vector>
+#include <iostream>
+#include <string>
+#include <memory>
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -12,24 +15,28 @@
 #include <clang/Tooling/JSONCompilationDatabase.h>
 #include <clang/Tooling/Tooling.h>
 
-#include "extend_cfg/data_struct/AST.h"
-#include "extend_cfg/data_struct/Block.h"
-#include "extend_cfg/data_struct/CFG.h"
+#include "data_struct/AST.h"
+#include "data_struct/Block.h"
+#include "data_struct/CFG.h"
 #include "extend_cfg/CFGList.h"
 #include "extend_cfg/CFGFrontendAction.h"
+
+
+#include "ast/ASTFrontendActionAST.h"
+#include "ast/ASTList.h"
 
 namespace clang_cfg{
 
     namespace py = pybind11;
 
     using std::vector;
-    using std::string;
+    using string = std::string;
 
     using namespace clang;
     using namespace clang::tooling;
 
     std::unique_ptr<CompilationDatabase> getCompilationDataBase(StringRef& config_json) {
-        std::string error_str;
+        string error_str;
         std::unique_ptr<JSONCompilationDatabase> database =
                 JSONCompilationDatabase::loadFromBuffer(config_json, error_str, JSONCommandLineSyntax::AutoDetect);
         if(database == NULL) {
@@ -41,14 +48,28 @@ namespace clang_cfg{
 
     class Parser {
     public:
-        vector<vector<CFG>> parse(vector<string> file_names, string compile_args) {
+        vector<vector<CFG>> parse_to_extendcfg(vector<string> file_names, string compile_args) {
+            CFGList& list = CFGList::getInst();
+            list.vecs.clear();
             StringRef compile_json = StringRef(compile_args);
             std::unique_ptr<CompilationDatabase> database = getCompilationDataBase(compile_json);
             vector<CompileCommand> vs = (*database).getAllCompileCommands();
             ClangTool tool(*database, ArrayRef<string>(file_names));
             tool.run(newFrontendActionFactory<CFGFrontendAction>().get());
-            CFGList& list = CFGList::getInst();
+            list = CFGList::getInst();
             vector<vector<CFG>> vecs = list.vecs;
+            return vecs;
+        }
+        vector<AST> parse_to_ast(vector<string> file_names, string compile_args) {
+            ASTList& list = ASTList::getInst();
+            list.vecs.clear();
+            StringRef compile_json = StringRef(compile_args);
+            std::unique_ptr<CompilationDatabase> database = getCompilationDataBase(compile_json);
+            vector<CompileCommand> vs = (*database).getAllCompileCommands();
+            ClangTool tool(*database, ArrayRef<string>(file_names));
+            tool.run(newFrontendActionFactory<ASTFrontendActionAST>().get());
+            list = ASTList::getInst();
+            vector<AST> vecs = list.vecs;
             return vecs;
         }
     };
@@ -56,7 +77,8 @@ namespace clang_cfg{
     PYBIND11_MODULE(clang_cfg, m) {
         py::class_<Parser>(m, "Parser")
                 .def(py::init<>())
-                .def("parse", &Parser::parse)
+                .def("parse_to_extendcfg", &Parser::parse_to_extendcfg)
+                .def("parse_to_ast", &Parser::parse_to_ast)
                 ;
 
         py::class_<CFG>(m, "CFG")

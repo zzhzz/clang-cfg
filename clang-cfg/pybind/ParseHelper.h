@@ -9,7 +9,7 @@
 
 #include <string>
 
-#include "global.h"
+#include "extend_cfg/global.h"
 
 namespace clang_cfg {
     using namespace clang;

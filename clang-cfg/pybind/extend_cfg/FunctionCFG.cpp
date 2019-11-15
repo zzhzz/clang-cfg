@@ -15,8 +15,6 @@ namespace clang_cfg {
     string FunctionCFG::getNameAsString() const {
         if(const FunctionDecl* functionDecl = dyn_cast<FunctionDecl>(decl)){
             return functionDecl->getNameAsString();
-        } else {
-            return "";
         }
     }
 
@@ -36,7 +34,7 @@ namespace clang_cfg {
                 Optional<clang::CFGStmt> block_stmt = block_it->getAs<clang::CFGStmt>();
                 if(block_stmt) {
                     Stmt* stmt = const_cast<Stmt*>(block_stmt->getStmt());
-                    if(stmt){
+                    if(stmt != nullptr){
                         AST ast = transToAST(stmt, ctx);
                         block.add_ast(ast);
                     }
@@ -73,7 +71,7 @@ namespace clang_cfg {
         ast.add_node(name);
         queue<pair<Stmt*, int>> que;
         while(!que.empty()) que.pop();
-        que.push(make_pair(stmt, 0));
+        que.push(make_pair(const_cast<Stmt*>(stmt), 0));
         while(!que.empty()) {
             Stmt* cur_stmt = que.front().first;
             int uid = que.front().second;
