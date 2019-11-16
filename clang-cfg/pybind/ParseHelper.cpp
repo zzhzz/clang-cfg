@@ -11,13 +11,19 @@ namespace clang_cfg{
     using namespace clang;
     using namespace llvm;
 
-    bool ParseHelper::isInSystem(ASTContext& context, Decl* decl) {
-        if(isa<FunctionDecl>(decl)){
-            auto* fd = dyn_cast<FunctionDecl>(decl);
-            return fd->isDependentContext();
+    bool ParseHelper::isInSystem(ASTContext& context, const FunctionDecl* decl) {
+        if(decl->isInStdNamespace() || decl->isDependentContext()) {
+            return true;
         }
-        return context.getSourceManager().isInSystemHeader(decl->getBeginLoc()) ||
-                context.getSourceManager().isInSystemMacro(decl->getBeginLoc());
+        if(decl->getLocation().isValid()){
+            if(context.getSourceManager().isInSystemHeader(decl->getLocation())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     bool ParseHelper::canIncludeInGraph(Decl* decl) {

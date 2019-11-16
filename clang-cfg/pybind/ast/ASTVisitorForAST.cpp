@@ -6,6 +6,7 @@
 #include "ParseHelper.h"
 
 #include <queue>
+#include <ctime>
 
 namespace clang_cfg{
 
