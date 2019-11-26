@@ -83,9 +83,55 @@ namespace clang_cfg{
         return nullptr;
     }
 
-    bool ParseHelper::type_simplify(AST &ast, int uid, const string &type) {
+    void replace_all(string& type, const string& pattern, const string& target) {
+        int pos = -1;
+        while((pos = type.find(pattern)) != string::npos){
+            type.replace(pos, pattern.length(), target);
+        }
+    }
 
-        return false;
+    void ParseHelper::type_simplify(AST &ast, int uid, string &type) {
+        if(type_set.find(type) != type_set.end()){
+            ast.modify_node(uid, type);
+            return ;
+        }
+        replace_all(type, "long long", "long");
+        replace_all(type, "long double", "double");
+        replace_all(type, "unsigned", "^");
+        replace_all(type, "const", "=");
+        replace_all(type, "struct", "$");
+        replace_all(type, "class", "@");
+        replace_all(type, "int", "~");
+        replace_all(type, "float", "-");
+        replace_all(type, "double", "!");
+        replace_all(type, "long", "#");
+        replace_all(type, "char", "%");
+        replace_all(type, "string", ";");
+        replace_all(type, "::", ":");
+        ast.modify_node(uid, type);
+        std::cout << type << std::endl;
+        for(char c: type) {
+            if(!isalpha(c)) {
+                ast.add_edge(uid, ast.get_next());
+                switch(c){
+                    case '$': ast.add_node("struct"); break;
+                    case '^': ast.add_node("unsigned"); break;
+                    case '=': ast.add_node("const"); break;
+                    case '@': ast.add_node("class"); break;
+                    case '~': ast.add_node("int"); break;
+                    case '-': ast.add_node("float"); break;
+                    case '!': ast.add_node("double"); break;
+                    case '#': ast.add_node("long"); break;
+                    case '%': ast.add_node("char"); break;
+                    case ';': ast.add_node("string"); break;
+                    default: ast.add_node(string(c, 1));
+                }
+            }
+        }
+    }
+
+    void ParseHelper::init_type_set() {
+        type_set.insert({"int", "float", "double", "long", "char", "struct", "class", "string"});
     }
 
 }

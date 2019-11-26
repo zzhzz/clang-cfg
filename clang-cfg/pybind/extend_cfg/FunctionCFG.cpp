@@ -77,7 +77,6 @@ namespace clang_cfg {
             int uid = que.front().second;
             que.pop();
             if(const BinaryOperator* opstmt = dyn_cast<BinaryOperator>(cur_stmt)){
-                int v = ast.get_next();
                 ast.modify_node(uid, string(opstmt->getOpcodeStr().data()));
                 std::string lvalue = ParseHelper::getVarName(opstmt->getLHS()->IgnoreParens()->IgnoreImpCasts());
                 std::string rvalue = ParseHelper::getVarName(opstmt->getRHS()->IgnoreParens()->IgnoreImpCasts());
@@ -136,7 +135,24 @@ namespace clang_cfg {
             }
             if(const IntegerLiteral* literal = dyn_cast<IntegerLiteral>(cur_stmt)){
                 long long v = *(literal->getValue().getRawData());
-                ast.modify_node(uid, "const_" + std::to_string(v));
+                string val = std::to_string(v);
+                ast.modify_node(uid, val);
+                for(char c: val){
+                    ast.add_edge(uid, ast.get_next());
+                    ast.add_node(string(c, 1));
+                }
+            }
+            if(const FloatingLiteral* literal = dyn_cast<FloatingLiteral>(cur_stmt)){
+                double v = literal->getValue().convertToDouble();
+                string val = std::to_string(v);
+                ast.modify_node(uid, val);
+                for(char c: val){
+                    ast.add_edge(uid, ast.get_next());
+                    ast.add_node(string(c, 1));
+                }
+            }
+            if(const clang::StringLiteral* literal = dyn_cast<clang::StringLiteral>(cur_stmt)){
+                ast.modify_node(uid, "string");
             }
             for(Stmt::child_iterator child = cur_stmt->child_begin(); child != cur_stmt->child_end(); child++){
                 if(*child == nullptr){
@@ -144,8 +160,9 @@ namespace clang_cfg {
                 }
                 string classname = (*child)->getStmtClassName();
                 if(classname.length() > 0){
-                    que.push(make_pair(*child, ast.get_next()));
-                    ast.add_edge(uid, ast.get_next());
+                    int v = ast.get_next();
+                    que.push(make_pair(*child, v));
+                    ast.add_edge(uid, v);
                     ast.add_node(classname);
                 }
             }
