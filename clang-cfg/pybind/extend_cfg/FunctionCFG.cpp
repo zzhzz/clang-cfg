@@ -78,8 +78,7 @@ namespace clang_cfg {
             que.pop();
             if(const BinaryOperator* opstmt = dyn_cast<BinaryOperator>(cur_stmt)){
                 int v = ast.get_next();
-                ast.add_edge(uid, v);
-                ast.add_node(string(opstmt->getOpcodeStr().data()));
+                ast.modify_node(uid, string(opstmt->getOpcodeStr().data()));
                 std::string lvalue = ParseHelper::getVarName(opstmt->getLHS()->IgnoreParens()->IgnoreImpCasts());
                 std::string rvalue = ParseHelper::getVarName(opstmt->getRHS()->IgnoreParens()->IgnoreImpCasts());
 
@@ -99,9 +98,7 @@ namespace clang_cfg {
                 } else {
                     name += "_suf";
                 }
-                int v = ast.get_next();
-                ast.add_edge(uid, v);
-                ast.add_node(name);
+                ast.modify_node(uid, name);
                 ast.add_defination(value);
                 ast.add_usage(value);
             }
@@ -122,8 +119,7 @@ namespace clang_cfg {
                         std::string name = vd->getNameAsString();
                         ast.add_defination(name);
                         std::string type = vd->getType().getUnqualifiedType().getCanonicalType().getAsString();
-                        ast.add_edge(uid, ast.get_next());
-                        ast.add_node(type);
+                        ParseHelper::type_simplify(ast, uid, type);
                     }
                 }
             }
@@ -131,14 +127,12 @@ namespace clang_cfg {
                 const ValueDecl* vd = dr->getDecl();
                 if(vd){
                     std::string type = vd->getType().getCanonicalType().getAsString();
-                    ast.add_edge(uid, ast.get_next());
-                    ast.add_node(type);
+                    ParseHelper::type_simplify(ast, uid, type);
                 }
             }
-            if(const ImplicitCastExpr* expr = dyn_cast<ImplicitCastExpr>(cur_stmt)){
+            if(const CastExpr* expr = dyn_cast<CastExpr>(cur_stmt)){
                 std::string kind = expr->getCastKindName();
-                ast.add_edge(uid, ast.get_next());
-                ast.add_node(kind);
+                ast.modify_node(uid, kind);
             }
             if(const IntegerLiteral* literal = dyn_cast<IntegerLiteral>(cur_stmt)){
                 long long v = *(literal->getValue().getRawData());
