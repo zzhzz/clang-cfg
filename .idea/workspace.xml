@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Clang-CFG" targetName="extern_llvm" />
+      <config projectName="Clang-CFG" targetName="extend_cfg" />
+      <config projectName="Clang-CFG" targetName="CFG" />
+      <config projectName="Clang-CFG" targetName="extern_pybind" />
+      <config projectName="Clang-CFG" targetName="BLOCK" />
+      <config projectName="Clang-CFG" targetName="clang_cfg" />
+      <config projectName="Clang-CFG" targetName="ParseHelper" />
+      <config projectName="Clang-CFG" targetName="AST" />
+      <config projectName="Clang-CFG" targetName="ast" />
+    </generated>
+  </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_DIR="build" />
     </configurations>
   </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d602931e-a9f6-4926-a79a-4bb6d0f7d84a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/FunctionCFG.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/FunctionCFG.cpp" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
@@ -15,6 +43,18 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="CMake Application.extern_llvm">
     <configuration name="AST" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Clang-CFG" TARGET_NAME="AST" CONFIG_NAME="Debug">
@@ -32,12 +72,22 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ParseHelper" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Clang-CFG" TARGET_NAME="ParseHelper" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ast" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Clang-CFG" TARGET_NAME="ast" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="clang_cfg" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Clang-CFG" TARGET_NAME="clang_cfg" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="clang_tool" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Clang-CFG" TARGET_NAME="clang_tool" CONFIG_NAME="Debug">
+    <configuration name="extend_cfg" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Clang-CFG" TARGET_NAME="extend_cfg" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -56,10 +106,52 @@
       <item itemvalue="CMake Application.extern_llvm" />
       <item itemvalue="CMake Application.extern_pybind" />
       <item itemvalue="CMake Application.clang_cfg" />
-      <item itemvalue="CMake Application.clang_tool" />
+      <item itemvalue="CMake Application.ParseHelper" />
+      <item itemvalue="CMake Application.ast" />
       <item itemvalue="CMake Application.AST" />
       <item itemvalue="CMake Application.BLOCK" />
       <item itemvalue="CMake Application.CFG" />
+      <item itemvalue="CMake Application.extend_cfg" />
     </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d602931e-a9f6-4926-a79a-4bb6d0f7d84a" name="Default Changelist" comment="" />
+      <created>1574773976440</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574773976440</updated>
+      <workItem from="1574773979447" duration="718000" />
+    </task>
+    <task id="LOCAL-00001" summary="merge">
+      <created>1574774170140</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1574774170141</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge" />
   </component>
 </project>
