@@ -21,6 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d602931e-a9f6-4926-a79a-4bb6d0f7d84a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.h" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/FunctionCFG.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/FunctionCFG.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -124,7 +126,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574773976440</updated>
-      <workItem from="1574773979447" duration="718000" />
+      <workItem from="1574773979447" duration="1558000" />
     </task>
     <task id="LOCAL-00001" summary="merge">
       <created>1574774170140</created>
@@ -133,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574774170141</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="change nodes">
+      <created>1574774791542</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1574774791542</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,7 +160,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge" />
+    <MESSAGE value="change nodes" />
+    <option name="LAST_COMMIT_MESSAGE" value="change nodes" />
   </component>
 </project>

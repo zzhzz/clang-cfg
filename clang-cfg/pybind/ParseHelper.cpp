@@ -83,6 +83,11 @@ namespace clang_cfg{
         return nullptr;
     }
 
+    bool ParseHelper::type_simplify(AST &ast, int uid, const string &type) {
+
+        return false;
+    }
+
 }
 
 

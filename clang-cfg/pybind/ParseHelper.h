@@ -9,6 +9,7 @@
 
 #include <string>
 
+#include "data_struct/AST.h"
 #include "extend_cfg/global.h"
 
 namespace clang_cfg {
@@ -22,6 +23,7 @@ namespace clang_cfg {
         static bool canBeCallerInGraph(Decl* decl);
         static string getVarName(const Expr* expr);
         static Decl* getDeclFromCall(CallExpr* callExpr);
+        static bool type_simplify(AST& ast, int uid, const string &type);
     };
 }
 
