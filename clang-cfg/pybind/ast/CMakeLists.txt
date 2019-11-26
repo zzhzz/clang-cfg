@@ -1,0 +1,5 @@
+
+ADD_LIBRARY(ast ASTFrontendActionAST.h ASTVisitorForAST.h ASTVisitorForAST.cpp ASTConsumerForAST.h ASTList.h global.h)
+
+TARGET_LINK_LIBRARIES(ast AST)
+SET_TARGET_PROPERTIES(ast PROPERTIES CXX_VISIBILITY_PRESET hidden)

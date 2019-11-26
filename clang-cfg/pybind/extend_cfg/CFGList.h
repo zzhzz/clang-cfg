@@ -4,9 +4,6 @@
 
 #pragma once
 
-#ifndef CLANG_CFG_CFGLIST_H
-#define CLANG_CFG_CFGLIST_H
-
 #include "global.h"
 #include "data_struct/CFG.h"
 
@@ -23,6 +20,3 @@ namespace clang_cfg{
     };
 
 }
-
-
-#endif //CLANG_CFG_CFGLIST_H

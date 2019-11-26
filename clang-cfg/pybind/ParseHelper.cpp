@@ -4,20 +4,26 @@
 
 #include <queue>
 
-#include "global.h"
+#include "extend_cfg/global.h"
 #include "ParseHelper.h"
 
 namespace clang_cfg{
     using namespace clang;
     using namespace llvm;
 
-    bool ParseHelper::isInSystem(ASTContext& context, Decl* decl) {
-        if(context.getSourceManager().isInSystemHeader(decl->getLocation()) ||
-            context.getSourceManager().isInExternCSystemHeader(decl->getLocation()) ||
-            context.getSourceManager().isInSystemMacro(decl->getLocation())) {
+    bool ParseHelper::isInSystem(ASTContext& context, const FunctionDecl* decl) {
+        if(decl->isInStdNamespace() || decl->isDependentContext()) {
             return true;
         }
-        return false;
+        if(decl->getLocation().isValid()){
+            if(context.getSourceManager().isInSystemHeader(decl->getLocation())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     bool ParseHelper::canIncludeInGraph(Decl* decl) {

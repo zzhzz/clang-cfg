@@ -1,4 +1,5 @@
 //
+//
 // Created by zzhzz on 2019-09-26.
 //
 #pragma once
@@ -18,8 +19,7 @@
 #include <clang/Rewrite/Core/Rewriter.h>
 #include <clang/Analysis/CFG.h>
 
-#include "ParseHelper.h"
-#include "data_struct/CFG.h"
+#include "data_struct/AST.h"
 
 namespace clang_cfg {
     using namespace clang;
