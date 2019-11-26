@@ -23,7 +23,7 @@ namespace clang_cfg{
                 auto* functionDecl = dyn_cast<FunctionDecl>(decl);
                 if(!ParseHelper::isInSystem(context, functionDecl) && functionDecl->hasBody()){
                     string function_name = functionDecl->getNameInfo().getAsString(),
-                            node_label = string(dyn_cast<Decl>(functionDecl)->getDeclKindName());
+                            node_label = string(decl->getDeclKindName());
                     int function_decl_id = ast.get_next();
                     ast.add_node(node_label);
                     ast.add_edge(0, function_decl_id);
@@ -31,6 +31,9 @@ namespace clang_cfg{
                     ast.add_node(function_name);
                     ast.add_edge(function_decl_id, function_name_id);
                     Stmt* functionStmt = functionDecl->getBody();
+                    if(functionStmt == nullptr){
+                        continue;
+                    }
                     queue<pair<Stmt*, int>> qstmt;
                     qstmt.push(std::make_pair(functionStmt, function_decl_id));
                     while(!qstmt.empty()){
@@ -58,7 +61,25 @@ namespace clang_cfg{
 
                         if(isa<CallExpr>(root_stmt)){
                             auto* callExpr = dyn_cast<CallExpr>(root_stmt);
-                            string callee = callExpr->getDirectCallee()->getNameAsString();
+							FunctionDecl* calleeDecl = callExpr->getDirectCallee();
+							string callee;
+							if(calleeDecl != nullptr){
+								callee = calleeDecl->getNameAsString();
+							} else {
+                                Decl* otherDecl = callExpr->getCalleeDecl();
+                                if(otherDecl != nullptr){
+                                    if(isa<ParmVarDecl>(otherDecl)){
+                                        callee = dyn_cast<ParmVarDecl>(otherDecl)->getNameAsString();
+                                    }
+                                } else {
+									if(isa<CXXMemberCallExpr>(callExpr)){
+										callee = dyn_cast<CXXMemberCallExpr>(callExpr)->getMethodDecl()->getNameAsString();
+									} else if(isa<UserDefinedLiteral>(callExpr)){
+										callee = dyn_cast<UserDefinedLiteral>(callExpr)->getUDSuffix()->getName().data();
+									}
+									
+								}
+							}
                             int call_id = ast.get_next();
                             ast.add_node(callee);
                             ast.add_edge(root_id, call_id);
@@ -107,7 +128,7 @@ namespace clang_cfg{
                     for(FunctionDecl::param_iterator param_it = functionDecl->param_begin(); param_it != functionDecl->param_end(); param_it++){
                         ParmVarDecl* parmVarDecl = *param_it;
                         if(parmVarDecl == nullptr) continue;
-                        string param_name = parmVarDecl->getDeclKindName();
+                        string param_name = parmVarDecl->getNameAsString();
                         if(!param_name.empty()){
                             int param_id = ast.get_next();
                             ast.add_node(string(parmVarDecl->getDeclKindName()));
