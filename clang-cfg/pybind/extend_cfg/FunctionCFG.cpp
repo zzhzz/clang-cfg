@@ -34,6 +34,8 @@ namespace clang_cfg {
                 Optional<clang::CFGStmt> block_stmt = block_it->getAs<clang::CFGStmt>();
                 if(block_stmt) {
                     Stmt* stmt = const_cast<Stmt*>(block_stmt->getStmt());
+                    block.start_lineno = ctx.getSourceManager().getSpellingLineNumber(stmt->getBeginLoc());
+                    block.end_lineno = ctx.getSourceManager().getSpellingLineNumber(stmt->getEndLoc());
                     if(stmt != nullptr){
                         AST ast = transToAST(stmt, ctx);
                         block.add_ast(ast);

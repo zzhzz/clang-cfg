@@ -16,6 +16,7 @@ using std::vector;
 namespace clang_cfg{
     class Block {
     public:
+        int start_lineno, end_lineno;
         void add_ast(AST ast);
         vector<AST> content;
     };

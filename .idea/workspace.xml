@@ -2,33 +2,32 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="Clang-CFG" targetName="extern_llvm" />
-      <config projectName="Clang-CFG" targetName="extend_cfg" />
-      <config projectName="Clang-CFG" targetName="CFG" />
       <config projectName="Clang-CFG" targetName="extern_pybind" />
-      <config projectName="Clang-CFG" targetName="BLOCK" />
-      <config projectName="Clang-CFG" targetName="clang_cfg" />
       <config projectName="Clang-CFG" targetName="ParseHelper" />
-      <config projectName="Clang-CFG" targetName="AST" />
       <config projectName="Clang-CFG" targetName="ast" />
+      <config projectName="Clang-CFG" targetName="extend_cfg" />
+      <config projectName="Clang-CFG" targetName="clang_cfg" />
+      <config projectName="Clang-CFG" targetName="extern_llvm" />
+      <config projectName="Clang-CFG" targetName="AST" />
+      <config projectName="Clang-CFG" targetName="CFG" />
+      <config projectName="Clang-CFG" targetName="BLOCK" />
     </generated>
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_DIR="cmake-build-debug" />
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_DIR="build" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3037e83-e97b-49ef-b425-5a4c0ddf0249" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+    <list default="true" id="d602931e-a9f6-4926-a79a-4bb6d0f7d84a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/clang-cfg.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/clang-cfg.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.h" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/ASTConsumerForCFG.h" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/ASTConsumerForCFG.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/data_struct/Block.h" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/data_struct/Block.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/FunctionCFG.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/FunctionCFG.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/pybind.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/pybind.cpp" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +41,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
+  <component name="ProjectId" id="1U9fxKoKr8BGvY7GnSlb2ajzdkd" />
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="CMakeSettings" />
   </component>
   <component name="RunDashboard">
@@ -119,29 +122,60 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task id="LOCAL-00001" summary="Merge branch 'master' of https://github.com/zzhzz/clang-cfg&#10;&#10;# Conflicts:&#10;#&#9;.idea/clang-cfg.iml&#10;#&#9;.idea/workspace.xml">
-      <created>1574776712059</created>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d602931e-a9f6-4926-a79a-4bb6d0f7d84a" name="Default Changelist" comment="" />
+      <created>1574773976440</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574773976440</updated>
+      <workItem from="1574773979447" duration="1785000" />
+      <workItem from="1574784480593" duration="316000" />
+      <workItem from="1574869932903" duration="524000" />
+    </task>
+    <task id="LOCAL-00001" summary="merge">
+      <created>1574774170140</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1574776712059</updated>
+      <updated>1574774170141</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="change nodes">
+      <created>1574774791542</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1574774791542</updated>
+    </task>
+    <task id="LOCAL-00003" summary="change nodes">
+      <created>1574776064714</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1574776064714</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Merge branch 'master' of https://github.com/zzhzz/clang-cfg&#10;&#10;# Conflicts:&#10;#&#9;.idea/clang-cfg.iml&#10;#&#9;.idea/workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/zzhzz/clang-cfg&#10;&#10;# Conflicts:&#10;#&#9;.idea/clang-cfg.iml&#10;#&#9;.idea/workspace.xml" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="merge" />
+    <MESSAGE value="change nodes" />
+    <option name="LAST_COMMIT_MESSAGE" value="change nodes" />
   </component>
 </project>
