@@ -49,7 +49,6 @@ namespace clang_cfg{
     class Parser {
     public:
         vector<vector<CFG>> parse_to_extendcfg(vector<string> file_names, string compile_args) {
-		std::cout << "in the func" << std::endl;
             CFGList& list = CFGList::getInst();
             list.vecs.clear();
             StringRef compile_json = StringRef(compile_args);
