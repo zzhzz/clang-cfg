@@ -19,15 +19,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e3037e83-e97b-49ef-b425-5a4c0ddf0249" name="Default Changelist" comment="">
+    <list default="true" id="e3037e83-e97b-49ef-b425-5a4c0ddf0249" name="Default Changelist" comment="Merge branch 'master' of https://github.com/zzhzz/clang-cfg&#10;&#10;# Conflicts:">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/clang-cfg.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/clang-cfg.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.h" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/ParseHelper.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/ASTConsumerForCFG.h" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/ASTConsumerForCFG.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/FunctionCFG.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/clang-cfg/pybind/extend_cfg/FunctionCFG.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +121,21 @@
       <option name="project" value="LOCAL" />
       <updated>1574776712059</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Merge branch 'master' of https://github.com/zzhzz/clang-cfg&#10;&#10;# Conflicts:&#10;#&#9;.idea/clang-cfg.iml&#10;#&#9;.idea/workspace.xml">
+      <created>1574781740059</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1574781740059</updated>
+    </task>
+    <task id="LOCAL-00003" summary="type simplify">
+      <created>1574781853382</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1574781853382</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,6 +151,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge branch 'master' of https://github.com/zzhzz/clang-cfg&#10;&#10;# Conflicts:&#10;#&#9;.idea/clang-cfg.iml&#10;#&#9;.idea/workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/zzhzz/clang-cfg&#10;&#10;# Conflicts:&#10;#&#9;.idea/clang-cfg.iml&#10;#&#9;.idea/workspace.xml" />
+    <MESSAGE value="type simplify" />
+    <option name="LAST_COMMIT_MESSAGE" value="type simplify" />
   </component>
 </project>
