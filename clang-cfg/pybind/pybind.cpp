@@ -93,6 +93,8 @@ namespace clang_cfg{
         py::class_<Block>(m, "Block")
                 .def(py::init<>())
                 .def_readwrite("content", &Block::content)
+                .def_readwrite("sline", &Block::start_lineno)
+                .def_readwrite("eline", &Block::end_lineno)
                 ;
 
         py::class_<AST>(m, "AST")

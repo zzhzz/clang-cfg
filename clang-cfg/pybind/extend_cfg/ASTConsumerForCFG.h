@@ -22,7 +22,6 @@ namespace clang_cfg{
         void HandleTranslationUnit(ASTContext& context) override {
             CFGList& list = CFGList::getInst();
             list.vecs.emplace_back(vector<CFG>());
-            ParseHelper::init_type_set();
             visitor.TraverseDecl(context.getTranslationUnitDecl());
         }
 
