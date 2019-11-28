@@ -91,6 +91,8 @@ namespace clang_cfg{
     }
 
     void ParseHelper::type_simplify(AST &ast, int uid, string &type) {
+        set<string> type_set;
+        type_set.insert({"int", "float", "double", "long", "char", "struct", "class", "string"});
         if(type_set.find(type) != type_set.end()){
             ast.modify_node(uid, type);
             return ;
@@ -128,10 +130,6 @@ namespace clang_cfg{
                 }
             }
         }
-    }
-
-    void ParseHelper::init_type_set() {
-        type_set.insert({"int", "float", "double", "long", "char", "struct", "class", "string"});
     }
 
 }

@@ -21,8 +21,6 @@ namespace clang_cfg {
     using std::set;
     class ParseHelper {
     public:
-        static set<string> type_set;
-        static void init_type_set();
         static bool isInSystem(ASTContext& context, const FunctionDecl* decl);
         static bool canIncludeInGraph(Decl* decl);
         static bool canBeCallerInGraph(Decl* decl);
