@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <csetjmp>
+#include <csignal>
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -35,6 +37,10 @@ namespace clang_cfg{
     using namespace clang;
     using namespace clang::tooling;
 
+    static void abort_handler(void* arg){
+        throw std::exception();
+    }
+
     std::unique_ptr<CompilationDatabase> getCompilationDataBase(StringRef& config_json) {
         string error_str;
         std::unique_ptr<JSONCompilationDatabase> database =
@@ -55,6 +61,7 @@ namespace clang_cfg{
             std::unique_ptr<CompilationDatabase> database = getCompilationDataBase(compile_json);
             vector<CompileCommand> vs = (*database).getAllCompileCommands();
             ClangTool tool(*database, ArrayRef<string>(file_names));
+            sys::AddSignalHandler(abort_handler, nullptr);
             tool.run(newFrontendActionFactory<CFGFrontendAction>().get());
             list = CFGList::getInst();
             vector<vector<CFG>> vecs = list.vecs;

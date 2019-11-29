@@ -17,6 +17,7 @@
 #include <clang/Frontend/CompilerInstance.h>
 #include <clang/Rewrite/Core/Rewriter.h>
 #include <clang/Analysis/CFG.h>
+#include <llvm/Support/Signals.h>
 
 #include "ParseHelper.h"
 #include "data_struct/CFG.h"
