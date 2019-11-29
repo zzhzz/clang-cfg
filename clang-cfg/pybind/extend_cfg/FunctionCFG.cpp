@@ -104,8 +104,20 @@ namespace clang_cfg {
                 ast.add_usage(value);
             }
             if(const CallExpr* call_expr = dyn_cast<CallExpr>(cur_stmt)){
-                std::string name = call_expr->getDirectCallee()->getNameAsString();
-                ast.add_call(uid, name);
+                FunctionDecl* calleeDecl = call_expr->getDirectCallee();
+                std::string name;
+                if(calleeDecl != nullptr){
+                    name = calleeDecl->getNameAsString();    
+                } else {
+                    if(isa<CXXMemberCallExpr>(call_expr)){
+                        name = dyn_cast<CXXMemberCallExpr>(call_expr)->getMethodDecl()->getNameAsString();
+                    } else if(isa<UserDefinedLiteral>(call_expr)){
+                        name = dyn_cast<UserDefinedLiteral>(call_expr)->getUDSuffix()->data();
+                    }
+                }
+                if(!name.empty()){
+                    ast.add_call(uid, name);
+                }
                 int sz = call_expr->getNumArgs();
                 for(int i = 0; i < sz; i++){
                     const Expr* arg = call_expr->getArg(i);
