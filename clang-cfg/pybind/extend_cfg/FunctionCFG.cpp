@@ -138,16 +138,17 @@ namespace clang_cfg {
             if(const IntegerLiteral* literal = dyn_cast<IntegerLiteral>(cur_stmt)){
                 long long v = *(literal->getValue().getRawData());
                 string val = std::to_string(v);
-                ast.modify_node(uid, val);
+		ast.modify_node(uid, "int");
                 for(char c: val){
                     ast.add_edge(uid, ast.get_next());
                     ast.add_node(string(c, 1));
                 }
             }
             if(const FloatingLiteral* literal = dyn_cast<FloatingLiteral>(cur_stmt)){
-                double v = literal->getValue().convertToDouble();
-                string val = std::to_string(v);
-                ast.modify_node(uid, val);
+		SmallString<16> str;
+                literal->getValue().toString(str);
+		string val = string(str.c_str());
+		ast.modify_node(uid, "float");
                 for(char c: val){
                     ast.add_edge(uid, ast.get_next());
                     ast.add_node(string(c, 1));
