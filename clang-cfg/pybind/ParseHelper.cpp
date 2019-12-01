@@ -110,7 +110,7 @@ namespace clang_cfg{
         replace_all(type, "char", "%");
         replace_all(type, "string", ";");
         replace_all(type, "::", ":");
-	replace_all(type, " ", "");
+        replace_all(type, " ", "");
         for(char c: type) {
             if(!isalpha(c)) {
                 ast.add_edge(uid, ast.get_next());

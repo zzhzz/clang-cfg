@@ -37,6 +37,7 @@ namespace clang_cfg {
     }
 
     void AST::add_edge(int u, int v) {
+        this->parent[v] = u;
         this->edges.push_back(std::make_pair(u, v));
     }
 
@@ -48,6 +49,9 @@ namespace clang_cfg {
         this->node_labels[node_id] = new_value;
     }
 
+    int AST::get_parent(int uid) {
+        return this->parent[uid];
+    }
 }
 
 

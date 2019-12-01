@@ -150,19 +150,21 @@ namespace clang_cfg {
             if(const IntegerLiteral* literal = dyn_cast<IntegerLiteral>(cur_stmt)){
                 long long v = *(literal->getValue().getRawData());
                 string val = std::to_string(v);
-		ast.modify_node(uid, "int");
+                ast.modify_node(uid, "int");
+                int pid = ast.get_parent(uid);
                 for(char c: val){
-                    ast.add_edge(uid, ast.get_next());
+                    ast.add_edge(pid, ast.get_next());
                     ast.add_node(string(c, 1));
                 }
             }
             if(const FloatingLiteral* literal = dyn_cast<FloatingLiteral>(cur_stmt)){
-		SmallString<16> str;
-                literal->getValue().toString(str);
-		string val = string(str.c_str());
-		ast.modify_node(uid, "float");
+                SmallString<16> str;
+                        literal->getValue().toString(str);
+                string val = string(str.c_str());
+                ast.modify_node(uid, "float");
+                int pid = ast.get_parent(uid);
                 for(char c: val){
-                    ast.add_edge(uid, ast.get_next());
+                    ast.add_edge(pid, ast.get_next());
                     ast.add_node(string(c, 1));
                 }
             }
