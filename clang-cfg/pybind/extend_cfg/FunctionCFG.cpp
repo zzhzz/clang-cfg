@@ -104,7 +104,7 @@ namespace clang_cfg {
                 ast.add_usage(value);
             }
             if(const CallExpr* call_expr = dyn_cast<CallExpr>(cur_stmt)){
-                FunctionDecl* calleeDecl = call_expr->getDirectCallee();
+                const FunctionDecl* calleeDecl = call_expr->getDirectCallee();
                 std::string name;
                 if(calleeDecl != nullptr){
                     name = calleeDecl->getNameAsString();    
@@ -112,7 +112,7 @@ namespace clang_cfg {
                     if(isa<CXXMemberCallExpr>(call_expr)){
                         name = dyn_cast<CXXMemberCallExpr>(call_expr)->getMethodDecl()->getNameAsString();
                     } else if(isa<UserDefinedLiteral>(call_expr)){
-                        name = dyn_cast<UserDefinedLiteral>(call_expr)->getUDSuffix()->data();
+                        name = dyn_cast<UserDefinedLiteral>(call_expr)->getUDSuffix()->getName().data();
                     }
                 }
                 if(!name.empty()){

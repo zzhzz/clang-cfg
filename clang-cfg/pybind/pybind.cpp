@@ -54,6 +54,9 @@ namespace clang_cfg{
 
     class Parser {
     public:
+        Parser() {
+            sys::AddSignalHandler(abort_handler, nullptr);
+        }
         vector<vector<CFG>> parse_to_extendcfg(vector<string> file_names, string compile_args) {
             CFGList& list = CFGList::getInst();
             list.vecs.clear();
@@ -61,7 +64,6 @@ namespace clang_cfg{
             std::unique_ptr<CompilationDatabase> database = getCompilationDataBase(compile_json);
             vector<CompileCommand> vs = (*database).getAllCompileCommands();
             ClangTool tool(*database, ArrayRef<string>(file_names));
-            sys::AddSignalHandler(abort_handler, nullptr);
             tool.run(newFrontendActionFactory<CFGFrontendAction>().get());
             list = CFGList::getInst();
             vector<vector<CFG>> vecs = list.vecs;
