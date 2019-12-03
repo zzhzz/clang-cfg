@@ -102,6 +102,7 @@ namespace clang_cfg{
         replace_all(type, "unsigned", "^");
         replace_all(type, "const", "=");
         replace_all(type, "struct", "$");
+        replace_all(type, "std", "+");
         replace_all(type, "class", "@");
         replace_all(type, "int", "~");
         replace_all(type, "float", "-");
@@ -115,6 +116,7 @@ namespace clang_cfg{
             if(!isalpha(c)) {
                 ast.add_edge(uid, ast.get_next());
                 switch(c){
+                    case '.': ast.add_node("std"); break;
                     case '$': ast.add_node("struct"); break;
                     case '^': ast.add_node("unsigned"); break;
                     case '=': ast.add_node("const"); break;
@@ -125,7 +127,7 @@ namespace clang_cfg{
                     case '#': ast.add_node("long"); break;
                     case '%': ast.add_node("char"); break;
                     case ';': ast.add_node("string"); break;
-                    default: ast.add_node(string(c, 1));
+                    default: ast.add_node(string(1, c));
                 }
             }
         }

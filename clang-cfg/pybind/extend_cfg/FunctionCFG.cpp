@@ -154,7 +154,7 @@ namespace clang_cfg {
                 int pid = ast.get_parent(uid);
                 for(char c: val){
                     ast.add_edge(pid, ast.get_next());
-                    ast.add_node(string(c, 1));
+                    ast.add_node(string(1, c));
                 }
             }
             if(const FloatingLiteral* literal = dyn_cast<FloatingLiteral>(cur_stmt)){
@@ -165,7 +165,7 @@ namespace clang_cfg {
                 int pid = ast.get_parent(uid);
                 for(char c: val){
                     ast.add_edge(pid, ast.get_next());
-                    ast.add_node(string(c, 1));
+                    ast.add_node(string(1, c));
                 }
             }
             if(const clang::StringLiteral* literal = dyn_cast<clang::StringLiteral>(cur_stmt)){

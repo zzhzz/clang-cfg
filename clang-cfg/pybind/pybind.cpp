@@ -38,6 +38,7 @@ namespace clang_cfg{
     using namespace clang::tooling;
 
     static void abort_handler(void* arg){
+        std::cerr << "clang-cfg: Abort, maybe null pointer exception" << std::endl;
         throw std::exception();
     }
 
@@ -47,7 +48,8 @@ namespace clang_cfg{
                 JSONCompilationDatabase::loadFromBuffer(config_json, error_str, JSONCommandLineSyntax::AutoDetect);
         if(database == NULL) {
             //throw exception
-            std::cout << error_str << std::endl;
+            error_str = "clang-cfg: error in compilation json str";
+            std::cerr << error_str << std::endl;
         }
         return database;
     }
